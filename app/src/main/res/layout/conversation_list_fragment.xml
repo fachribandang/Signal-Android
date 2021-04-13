@@ -209,6 +209,18 @@
         android:clipChildren="false"
         android:clipToPadding="false"
         app:layout_behavior="org.thoughtcrime.securesms.util.views.SlideUpWithSnackbarBehavior">
+      <org.thoughtcrime.securesms.components.registration.PulsingFloatingActionButton
+          android:id="@+id/youtube_fab"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="20dp"
+          android:layout_marginEnd="16dp"
+          android:layout_marginTop="8dp"
+          android:contentDescription="@string/conversation_list_fragment__watch_youtube_description"
+          android:focusable="true"
+          android:tint="@color/core_ultramarine"
+          app:backgroundTint="@color/conversation_list_camera_button_background"
+          app:srcCompat="@drawable/ic_baseline_motion_photos_on_24" />
 
       <org.thoughtcrime.securesms.components.registration.PulsingFloatingActionButton
           android:id="@+id/camera_fab"

@@ -171,6 +171,7 @@ public class ConversationListFragment extends MainFragment implements ActionMode
   private TextView                          searchEmptyState;
   private PulsingFloatingActionButton       fab;
   private PulsingFloatingActionButton       cameraFab;
+  private PulsingFloatingActionButton       youtubeFab;
   private Stub<SearchToolbar>               searchToolbar;
   private ImageView                         proxyStatus;
   private ImageView                         searchAction;
@@ -210,6 +211,7 @@ public class ConversationListFragment extends MainFragment implements ActionMode
     list                    = view.findViewById(R.id.list);
     fab                     = view.findViewById(R.id.fab);
     cameraFab               = view.findViewById(R.id.camera_fab);
+    youtubeFab               = view.findViewById(R.id.youtube_fab);
     searchEmptyState        = view.findViewById(R.id.search_no_results);
     searchAction            = view.findViewById(R.id.search_action);
     toolbarShadow           = view.findViewById(R.id.conversation_list_toolbar_shadow);
@@ -229,7 +231,7 @@ public class ConversationListFragment extends MainFragment implements ActionMode
 
     fab.show();
     cameraFab.show();
-
+    youtubeFab.show()
     list.setLayoutManager(new LinearLayoutManager(requireActivity()));
     list.setItemAnimator(new DeleteItemAnimator());
     list.addOnScrollListener(new ScrollListener());
@@ -239,6 +241,7 @@ public class ConversationListFragment extends MainFragment implements ActionMode
     new ItemTouchHelper(new ArchiveListenerCallback()).attachToRecyclerView(list);
 
     fab.setOnClickListener(v -> startActivity(new Intent(getActivity(), NewConversationActivity.class)));
+//  tambah  listener untuk activity youtube
     cameraFab.setOnClickListener(v -> {
       Permissions.with(requireActivity())
                  .request(Manifest.permission.CAMERA)
@@ -298,6 +301,7 @@ public class ConversationListFragment extends MainFragment implements ActionMode
 
     fab.stopPulse();
     cameraFab.stopPulse();
+    youtubeFab.stopPulse();
     EventBus.getDefault().unregister(this);
   }
 
@@ -904,14 +908,14 @@ public class ConversationListFragment extends MainFragment implements ActionMode
       emptyState.get().setVisibility(View.VISIBLE);
       fab.startPulse(3 * 1000);
       cameraFab.startPulse(3 * 1000);
-
+      youtubeFab.startPulse(3 * 1000);
       SignalStore.onboarding().setShowNewGroup(true);
       SignalStore.onboarding().setShowInviteFriends(true);
     } else {
       list.setVisibility(View.VISIBLE);
       fab.stopPulse();
       cameraFab.stopPulse();
-
+      youtubeFab.stopPulse();
       if (emptyState.resolved()) {
         emptyState.get().setVisibility(View.GONE);
       }
