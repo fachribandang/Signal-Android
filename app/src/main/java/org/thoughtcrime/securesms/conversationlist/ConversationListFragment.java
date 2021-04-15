@@ -135,6 +135,7 @@ import org.thoughtcrime.securesms.util.WindowUtil;
 import org.thoughtcrime.securesms.util.concurrent.SimpleTask;
 import org.thoughtcrime.securesms.util.task.SnackbarAsyncTask;
 import org.thoughtcrime.securesms.util.views.Stub;
+import org.thoughtcrime.securesms.youtube.youtube_player;
 import org.whispersystems.libsignal.util.guava.Optional;
 
 import java.util.Collections;
@@ -211,7 +212,7 @@ public class ConversationListFragment extends MainFragment implements ActionMode
     list                    = view.findViewById(R.id.list);
     fab                     = view.findViewById(R.id.fab);
     cameraFab               = view.findViewById(R.id.camera_fab);
-    youtubeFab               = view.findViewById(R.id.youtube_fab);
+    youtubeFab              = view.findViewById(R.id.youtube_fab);
     searchEmptyState        = view.findViewById(R.id.search_no_results);
     searchAction            = view.findViewById(R.id.search_action);
     toolbarShadow           = view.findViewById(R.id.conversation_list_toolbar_shadow);
@@ -231,7 +232,7 @@ public class ConversationListFragment extends MainFragment implements ActionMode
 
     fab.show();
     cameraFab.show();
-    youtubeFab.show()
+    youtubeFab.show();
     list.setLayoutManager(new LinearLayoutManager(requireActivity()));
     list.setItemAnimator(new DeleteItemAnimator());
     list.addOnScrollListener(new ScrollListener());
@@ -242,6 +243,7 @@ public class ConversationListFragment extends MainFragment implements ActionMode
 
     fab.setOnClickListener(v -> startActivity(new Intent(getActivity(), NewConversationActivity.class)));
 //  tambah  listener untuk activity youtube
+    youtubeFab.setOnClickListener(v -> startActivity(new Intent(getActivity(), youtube_player.class)));
     cameraFab.setOnClickListener(v -> {
       Permissions.with(requireActivity())
                  .request(Manifest.permission.CAMERA)
