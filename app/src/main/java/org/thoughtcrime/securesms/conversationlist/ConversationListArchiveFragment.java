@@ -50,6 +50,7 @@ public class ConversationListArchiveFragment extends ConversationListFragment im
   private PulsingFloatingActionButton fab;
   private PulsingFloatingActionButton cameraFab;
   private PulsingFloatingActionButton youtubeFab;
+  private PulsingFloatingActionButton starchat;
   private Stub<Toolbar>               toolbar;
 
   public static ConversationListArchiveFragment newInstance() {
@@ -72,6 +73,7 @@ public class ConversationListArchiveFragment extends ConversationListFragment im
     fab        = view.findViewById(R.id.fab);
     cameraFab  = view.findViewById(R.id.camera_fab);
     youtubeFab = view.findViewById(R.id.youtube_fab);
+    starchat   = view.findViewById(R.id.startchat);
     emptyState = new Stub<>(view.findViewById(R.id.empty_state));
 
     ((AppCompatActivity) requireActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -79,6 +81,7 @@ public class ConversationListArchiveFragment extends ConversationListFragment im
     toolbar.get().setTitle(R.string.AndroidManifest_archived_conversations);
 
     fab.hide();
+    starchat.hide();
     cameraFab.hide();
     youtubeFab.hide();
   }

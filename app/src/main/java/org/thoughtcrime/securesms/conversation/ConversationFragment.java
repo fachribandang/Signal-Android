@@ -755,6 +755,11 @@ public class ConversationFragment extends LoggingFragment {
     if (!TextUtils.isEmpty(bodyBuilder)) {
       clipboard.setPrimaryClip(ClipData.newPlainText(null, bodyBuilder));
     }
+
+    ///chat di copy ke class chat berbbintang
+
+
+    ///
   }
 
   private void handleDeleteMessages(final Set<ConversationMessage> conversationMessages) {
