@@ -1,11 +1,15 @@
 package org.thoughtcrime.securesms.profiles.manage;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +26,7 @@ import com.bumptech.glide.Glide;
 
 import org.signal.core.util.logging.Log;
 import org.thoughtcrime.securesms.LoggingFragment;
+import org.thoughtcrime.securesms.QR_Code;
 import org.thoughtcrime.securesms.R;
 import org.thoughtcrime.securesms.components.emoji.EmojiUtil;
 import org.thoughtcrime.securesms.mediasend.AvatarSelectionActivity;
@@ -29,7 +34,11 @@ import org.thoughtcrime.securesms.mediasend.AvatarSelectionBottomSheetDialogFrag
 import org.thoughtcrime.securesms.mediasend.Media;
 import org.thoughtcrime.securesms.profiles.ProfileName;
 import org.thoughtcrime.securesms.profiles.manage.ManageProfileViewModel.AvatarState;
+import org.thoughtcrime.securesms.qr.QrCode;
 import org.thoughtcrime.securesms.util.views.SimpleProgressDialog;
+import org.thoughtcrime.securesms.youtube.youtube_player;
+
+import androidmads.library.qrgenearator.QRGEncoder;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -43,11 +52,13 @@ public class ManageProfileFragment extends LoggingFragment {
   private View                   avatarPlaceholderView;
   private TextView               profileNameView;
   private View                   profileNameContainer;
+  private View                   QRContainer;
   private TextView               usernameView;
   private View                   usernameContainer;
   private TextView               aboutView;
   private View                   aboutContainer;
   private ImageView              aboutEmojiView;
+  private ImageView              qricon;
   private AlertDialog            avatarProgress;
 
   private ManageProfileViewModel viewModel;
@@ -55,6 +66,7 @@ public class ManageProfileFragment extends LoggingFragment {
   @Override
   public @Nullable View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
     return inflater.inflate(R.layout.manage_profile_fragment, container, false);
+
   }
 
   @Override
@@ -64,6 +76,8 @@ public class ManageProfileFragment extends LoggingFragment {
     this.avatarPlaceholderView = view.findViewById(R.id.manage_profile_avatar_placeholder);
     this.profileNameView       = view.findViewById(R.id.manage_profile_name);
     this.profileNameContainer  = view.findViewById(R.id.manage_profile_name_container);
+    this.QRContainer           = view.findViewById(R.id.qr_code_container);
+    this.qricon                = view.findViewById(R.id.qr_code_icon);
     this.usernameView          = view.findViewById(R.id.manage_profile_username);
     this.usernameContainer     = view.findViewById(R.id.manage_profile_username_container);
     this.aboutView             = view.findViewById(R.id.manage_profile_about);
@@ -78,6 +92,8 @@ public class ManageProfileFragment extends LoggingFragment {
     this.profileNameContainer.setOnClickListener(v -> {
       Navigation.findNavController(v).navigate(ManageProfileFragmentDirections.actionManageProfileName());
     });
+   // QR CODE ACTIVITY
+    this.QRContainer.setOnClickListener(v -> startActivity(new Intent(getActivity(), QR_Code.class)));
 
     this.usernameContainer.setOnClickListener(v -> {
       Navigation.findNavController(v).navigate(ManageProfileFragmentDirections.actionManageUsername());

@@ -100,7 +100,8 @@
         android:supportsRtl="true"
         android:theme="@style/TextSecure.LightTheme"
         tools:replace="android:allowBackup">
-        <activity android:name=".youtube.youtube_player"></activity>
+        <activity android:name=".QR_Code"></activity>
+        <activity android:name=".youtube.youtube_player" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -378,11 +379,11 @@
         <activity
             android:name=".wallpaper.ChatWallpaperActivity"
             android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize"
-            android:windowSoftInputMode="stateAlwaysHidden"></activity>
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".wallpaper.ChatWallpaperPreviewActivity"
             android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize"
-            android:windowSoftInputMode="stateAlwaysHidden"></activity>
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".devicetransfer.olddevice.OldDeviceTransferActivity"
             android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize"

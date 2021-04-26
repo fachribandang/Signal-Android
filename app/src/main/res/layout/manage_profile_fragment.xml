@@ -88,7 +88,6 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           app:srcCompat="@drawable/ic_profile_name_24"
-          app:tint="@color/signal_text_primary"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="@id/manage_profile_name"
           app:layout_constraintBottom_toBottomOf="@id/manage_profile_name_subtitle"/>
@@ -133,7 +132,6 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           app:srcCompat="@drawable/ic_at_24"
-          app:tint="@color/signal_text_primary"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="@id/manage_profile_username"
           app:layout_constraintBottom_toBottomOf="@id/manage_profile_username_subtitle"/>
@@ -178,7 +176,6 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           app:srcCompat="@drawable/ic_compose_24"
-          app:tint="@color/signal_text_primary"
           app:layout_constraintTop_toTopOf="@id/manage_profile_about"
           app:layout_constraintBottom_toBottomOf="@id/manage_profile_about_subtitle"
           app:layout_constraintStart_toStartOf="parent"/>
@@ -213,15 +210,44 @@
         style="@style/Signal.Text.Preview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="33dp"
-        android:layout_marginBottom="16dp"
         android:padding="26dp"
         android:text="@string/CreateProfileActivity_signal_profiles_are_end_to_end_encrypted"
         android:textColor="@color/signal_text_secondary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/manage_profile_about_container"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/qr_code_container" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/qr_code_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackground"
+        android:paddingStart="36dp"
+        android:paddingTop="26dp"
+        android:paddingEnd="36dp"
+        android:paddingBottom="26dp"
+        app:layout_constraintTop_toBottomOf="@+id/manage_profile_about_container">
+
+      <ImageView
+          android:id="@+id/qr_code_icon"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="@id/qr_code_name"
+          app:srcCompat="@drawable/ic_baseline_qr_code_24" />
+
+      <org.thoughtcrime.securesms.components.emoji.EmojiTextView
+          android:id="@+id/qr_code_name"
+          style="@style/Signal.Text.Body"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="26dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toEndOf="@id/qr_code_icon"
+          app:layout_constraintTop_toTopOf="parent"
+          tools:text="QR_Code" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 

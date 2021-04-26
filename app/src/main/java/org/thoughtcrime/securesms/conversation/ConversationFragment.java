@@ -1666,6 +1666,11 @@ public class ConversationFragment extends LoggingFragment {
         case R.id.action_multiselect: handleEnterMultiSelect(conversationMessage);                                          return true;
         case R.id.action_forward:     handleForwardMessage(conversationMessage);                                            return true;
         case R.id.action_download:    handleSaveAttachment((MediaMmsMessageRecord) conversationMessage.getMessageRecord()); return true;
+        //pin chat
+        case R.id.menu_pin_selected:  handleCopyMessage(SetUtil.newHashSet(conversationMessage));                           return true;
+        //unpin chat
+        case R.id.menu_unpin_selected:  handleCopyMessage(SetUtil.newHashSet(conversationMessage));                           return true;
+
         default:                                                                                                            return false;
       }
     }
@@ -1679,7 +1684,7 @@ public class ConversationFragment extends LoggingFragment {
     public boolean onCreateActionMode(ActionMode mode, Menu menu) {
       MenuInflater inflater = mode.getMenuInflater();
       inflater.inflate(R.menu.conversation_context, menu);
-
+      inflater.inflate(R.menu.conversation_list_batch_pin, menu);
       mode.setTitle("1");
 
       if (Build.VERSION.SDK_INT >= 21) {
@@ -1747,6 +1752,16 @@ public class ConversationFragment extends LoggingFragment {
           return true;
         case R.id.menu_context_reply:
           maybeShowSwipeToReplyTooltip();
+          handleReplyMessage(getSelectedConversationMessage());
+          actionMode.finish();
+          return true;
+        case R.id.menu_pin_selected:
+// pin chat
+          handleReplyMessage(getSelectedConversationMessage());
+          actionMode.finish();
+          return true;
+        case R.id.menu_unpin_selected:
+// unpin chat
           handleReplyMessage(getSelectedConversationMessage());
           actionMode.finish();
           return true;
