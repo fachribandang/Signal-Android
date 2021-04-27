@@ -100,7 +100,8 @@
         android:supportsRtl="true"
         android:theme="@style/TextSecure.LightTheme"
         tools:replace="android:allowBackup">
-        <activity android:name=".QR_Code"></activity>
+        <activity android:name=".QR_Code_Scanner"></activity>
+        <activity android:name=".QR_Code" />
         <activity android:name=".youtube.youtube_player" />
 
         <meta-data

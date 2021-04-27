@@ -1,6 +1,7 @@
 package org.thoughtcrime.securesms;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -10,6 +11,7 @@ import android.os.Environment;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -17,6 +19,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
+import java.nio.file.Files;
 
 import androidmads.library.qrgenearator.QRGContents;
 import androidmads.library.qrgenearator.QRGEncoder;
@@ -31,7 +35,7 @@ public class QR_Code extends AppCompatActivity {
     private Bitmap bitmap;
     private QRGEncoder qrgEncoder;
     private AppCompatActivity activity;
-
+    private Button scanbutton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +43,13 @@ public class QR_Code extends AppCompatActivity {
         qrImage = findViewById(R.id.qrcodeimg);
         edtValue = findViewById(R.id.edt_value);
         activity = this;
-
+        scanbutton = findViewById(R.id.ScanButton);
+        scanbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openScanner();
+            }
+        });
         findViewById(R.id.GenerateButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,5 +82,9 @@ public class QR_Code extends AppCompatActivity {
             }
         });
 
+    }
+    public void openScanner() {
+        Intent a = new Intent(this, QR_Code_Scanner.class);
+        startActivity(a);
     }
 }
